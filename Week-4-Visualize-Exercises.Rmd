@@ -1,10 +1,14 @@
 ---
-title: "Visualize Data"
+title: "Visualize Data"  
+output: github_document 
 ---
 
-## Your Turn 0
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE ) 
 
-Add a setup chunk that loads the tidyverse packages.
+library(tidyverse)
+```
+
 
 
 ```{r}
@@ -15,8 +19,18 @@ mpg
 ## Your Turn 1
 
 Run the code on the slide to make a graph. Pay strict attention to spelling, capitalization, and parentheses!
+can add any notes in the your turn. put the code into the chunk.
+ggplot2 not working so we forced an update
+the first part initializes the graphic
+after each + it is adding a new layer (always put + at the end of the line not the beginning of the next)
+the geom_point is adding the points and aes(aesthetics) is telling it what to put where
+every plot starts with this bare template(not including mpg, point, and displ and hwy)
+first decision is what is the geom(etries) ours was point
 
-```{r}
+
+```{r}  
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
 
 ```
 
@@ -24,37 +38,50 @@ Run the code on the slide to make a graph. Pay strict attention to spelling, cap
 ## Your Turn 2
 
 Replace this scatterplot with one that draws boxplots. Use the cheatsheet. Try your best guess.
+I just replaced point with the word boxplot
 
 ```{r}
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = class, y = hwy))
+  geom_boxplot(mapping = aes(x = class, y = hwy))
 ```
 
 
 ## Your Turn 3
 
 Make a histogram of the `hwy` variable from `mpg`. Hint: do not supply a y variable.
+don't have to write mapping, can just write aes = ...
+we want a different binwidth so we can find how to change it by going to help-> and typing geom_histogram and looking for codes
 
 ```{r}
-
+ggplot(data = mpg) +
+  geom_histogram(mapping = aes(x = hwy))
 ```
 
 ## Your Turn 4
 
 Use the help page for `geom_histogram` to make the bins 2 units wide.
+inside aes is the values; outside it all the aesthetics we want to change
+type the color in quotes
 
 ```{r}
-
+ggplot(data = mpg) +
+  geom_histogram(mapping = aes(x = hwy), binwidth = 2, fill = "pink")
 ```
 
 
 ## Your Turn 5
 
-Add `color`, `size`, `alpha`, and `shape` aesthetics to your graph. Experiment.  
+Add `color`, `size`, `alpha`, and `shape` aesthetics to your graph. Experiment. 
+changing aesthetics is to draw peoples eyes to what we want them to notice
+shape only has 6 XD
+alpha changes transparency
+outside the aes applies to everything
+anything with one particular variable has to be inside aes
 
 ```{r}
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy))
+  geom_point(mapping = aes(x = displ, y = hwy, color = class), alpha = 0.3)  
+
 ```
 
 ## Help Me
